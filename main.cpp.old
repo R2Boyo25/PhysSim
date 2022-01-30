@@ -1,0 +1,57 @@
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+#include <X11/Xos.h>
+#include <stdlib.h>
+//#include "phys.h"
+
+Display *dis;
+int screen;
+Window win;
+GC gc;
+
+int WindowX = 500;
+int WindowY = 500;
+
+void init_x();
+void close_x();
+void redraw();
+
+int main (int argc, char* argv[]) {
+	init_x();
+
+	while(1) {		
+
+		redraw();
+
+		XFlush(dis);
+	}
+}
+
+void init_x() {       
+	unsigned long black,white;
+
+	dis=XOpenDisplay((char *)0);
+   	screen=DefaultScreen(dis);
+	black=BlackPixel(dis,screen),
+	white=WhitePixel(dis, screen);
+   	win=XCreateSimpleWindow(dis,DefaultRootWindow(dis),0,0,	
+		WindowX, WindowY, 5, white, black);
+	XSetStandardProperties(dis,win,"Molecule Sim","Molecule Sim",None,NULL,0,NULL);
+	XSelectInput(dis, win, ExposureMask|ButtonPressMask|KeyPressMask);
+        gc=XCreateGC(dis, win, 0,0);        
+	XSetBackground(dis,gc,black);
+	XSetForeground(dis,gc,white);
+	XClearWindow(dis, win);
+	XMapRaised(dis, win);
+};
+
+void close_x() {
+	XFreeGC(dis, gc);
+	XDestroyWindow(dis,win);
+	XCloseDisplay(dis);	
+	std::exit(1);				
+};
+
+void redraw() {
+	XClearWindow(dis, win);
+};

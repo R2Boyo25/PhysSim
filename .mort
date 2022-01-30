@@ -1,0 +1,45 @@
+[_default]
+out = "msim"
+oarg = [
+    "-Ofast",
+    "-I/usr/include/panda3d/",
+    "-L/usr/lib/x86_64-linux-gnu/panda3d"
+]
+
+l = [
+    "p3framework",
+    "panda",
+    "pandafx",
+    "pandaexpress",
+    "p3dtoolconfig",
+    "p3dtool",
+    "p3direct",
+    "pthread"
+]
+
+com = "c++"
+obj = true
+
+[run]
+out = "msim"
+oarg = [
+    "-Ofast",
+    "-I/usr/include/panda3d/",
+    "-L/usr/lib/x86_64-linux-gnu/panda3d"
+]
+
+l = [
+    "p3framework",
+    "panda",
+    "pandafx",
+    "pandaexpress",
+    "p3dtoolconfig",
+    "p3dtool",
+    "p3direct",
+    "pthread"
+]
+
+com = "c++"
+obj = true
+
+after = "./msim"
